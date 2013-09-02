@@ -1,0 +1,14 @@
+{
+  "name": "jquery-dotimeout",
+  "homepage": "https://github.com/cowboy/jquery-dotimeout",
+  "_release": "master",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "1849a50d3defe2205ea98d9363421805bc265149"
+  },
+  "_source": "git://github.com/cowboy/jquery-dotimeout.git",
+  "_target": "*",
+  "_originalSource": "jquery-dotimeout",
+  "_direct": true
+}

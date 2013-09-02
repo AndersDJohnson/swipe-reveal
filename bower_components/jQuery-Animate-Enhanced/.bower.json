@@ -1,0 +1,14 @@
+{
+  "name": "jQuery-Animate-Enhanced",
+  "homepage": "https://github.com/benbarnett/jQuery-Animate-Enhanced",
+  "_release": "master",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "2c9e5294c5e2472cddd071c47b5eb941754c3c79"
+  },
+  "_source": "git://github.com/benbarnett/jQuery-Animate-Enhanced.git",
+  "_target": "*",
+  "_originalSource": "benbarnett/jQuery-Animate-Enhanced",
+  "_direct": true
+}
