@@ -1,0 +1,34 @@
+{
+  "name": "swipe-reveal",
+  "version": "0.1.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "**/libpeerconnection.log"
+  ],
+  "dependencies": {
+    "hammerjs": "~1.0.5",
+    "jquery": "~2.0.3",
+    "jquery-easing": "danro/jquery-easing",
+    "jquery-dotimeout": "*",
+    "jquery-bridget": "~1.0.0",
+    "jQuery-Animate-Enhanced": "benbarnett/jQuery-Animate-Enhanced"
+  },
+  "description": "Swipe-to-reveal actions for lists.",
+  "main": "src/swipe-reveal.js",
+  "keywords": [
+    "swipe",
+    "list",
+    "mobile",
+    "hammer",
+    "gesture"
+  ],
+  "authors": [
+    "Anders D. Johnson"
+  ],
+  "homepage": "https://github.com/AndersDJohnson/swipe-reveal"
+}

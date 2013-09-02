@@ -1,0 +1,52 @@
+.swipe-reveal {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.swipe-reveal * {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.swipe-reveal li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  list-style-type: none;
+  list-style-position: inside;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  height: 64px;
+  display: block;
+  background: gray;
+}
+
+.swipe-reveal .swipe-reveal-contents {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  padding: 12px;
+}
+
+.swipe-reveal .swipe-reveal-revealed {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}

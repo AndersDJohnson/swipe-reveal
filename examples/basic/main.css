@@ -1,0 +1,41 @@
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 40px 0;
+  background: black;
+  font-family: sans-serif;
+}
+
+@media screen and (min-width: 480px) {
+  .swipe-reveal {
+    width: 480px;
+  }
+}
+
+.revealed-cell {
+  color: white;
+  height: 64px;
+  line-height: 64px;
+}
+
+.revealed-cell.message {
+  float: left;
+  padding: 0 12px;
+}
+
+.revealed-cell.undo {
+  float: right;
+  padding: 0 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-left: 1px solid #ccc;
+}
