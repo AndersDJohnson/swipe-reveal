@@ -39,8 +39,6 @@ var $list = $('.swipe-reveal');
 $list.swipeReveal();
 // ...
 $list.swipeReveal('undo', listElement);
-
-});
 ```
 
 And to "dismiss" a list item (remove from list), use:
@@ -49,6 +47,7 @@ And to "dismiss" a list item (remove from list), use:
 // ...
 $list.swipeReveal('dismiss', listElement);
 });
+```
 
 
 ## Options
