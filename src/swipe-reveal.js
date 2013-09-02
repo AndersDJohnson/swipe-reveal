@@ -60,29 +60,46 @@ SwipeReveal.prototype._init = function () {
     })
 
   this.$el.hammer(that.hammerOptions).on('dragstart', that.options.contentsSelector, function(event) {
+    var $this = $(this);
+    $this.data('swipe-reveal-contents', true);
     var gesture = event.gesture;
     if (gesture.direction !== 'right' && gesture.direction !== 'left') return false;
     that.currentItem = this;
     if (that.state !== 'default') return false;
     that.state = 'dragging';
+  });
+
+  this.$el.hammer(that.hammerOptions).on('dragstart', that.options.revealedSelector, function(event) {
     var $this = $(this);
+    var $li = $this.closest('li');
+    $li.doTimeout('dismiss')
+    $li.doTimeout('dismiss-warn')
+    $this.data('swipe-reveal-revealed', true);
+    var gesture = event.gesture;
+    if (gesture.direction !== 'right' && gesture.direction !== 'left') return false;
+    that.currentItem = this;
   });
   
   $(document).hammer(that.hammerOptions).on('drag', function(event) {
-    if (!that.currentItem) return;
-    if (that.state !== 'dragging') return false;
+    var $this = $(that.currentItem);
+    var isContents = $this.data('swipe-reveal-contents');
+    if (isContents) {
+      if (!that.currentItem) return false;
+      if (that.state !== 'dragging') return false;
+    }
     that.lastDragEvent = event;
     //if (this !== that.currentItem) return false;
-    var $this = $(that.currentItem);
     $this.css({
       left: event.gesture.deltaX
     , opacity: (that.width - Math.abs(event.gesture.deltaX)) / that.width
       //top: event.gesture.deltaY
     });
-    var $revealed = $this.closest('li').find(that.options.revealedSelector)
-    $revealed.css({
-     opacity: (Math.abs(event.gesture.deltaX)) / that.width
-    });
+    if (isContents) {
+      var $revealed = $this.closest('li').find(that.options.revealedSelector)
+      $revealed.css({
+       opacity: (Math.abs(event.gesture.deltaX)) / that.width
+      });
+    }
   });
 
   $(document).hammer(that.hammerOptions).on('dragend', function (event) {
@@ -111,7 +128,6 @@ SwipeReveal.prototype.onDragEnd = function(event) {
   var gesture = event.gesture;
   var $this = $(that.currentItem);
   var $li = that.getLi($this);
-  var $contents = $li.find('.' + that.options.contentsClass);
 
   if (Math.abs(gesture.deltaX) > that.width * that.options.revealThreshold) {
     that.slideOut(event, $li);
@@ -152,8 +168,10 @@ SwipeReveal.prototype.slideCancel = function (event, li) {
 
   that.state = 'default';
 
+  var isContents = $(that.currentItem).data('swipe-reveal-contents');
+
   var $li = that.getLi(li);
-  var $contents = $li.find(that.options.contentsSelector);
+  var $elem = $li.find(isContents ? that.options.contentsSelector : that.options.revealedSelector);
 
   var velocityX = gesture.velocityX;
   var startLeft = gesture.deltaX;
@@ -162,7 +180,7 @@ SwipeReveal.prototype.slideCancel = function (event, li) {
   var distStrength = (dist / that.width);
   var duration = (distStrength * that.width) / Math.max(0.2, Math.abs(velocityX));
 
-  $contents.animate({
+  $elem.animate({
     left: 0
   , opacity: 1
   }, {
@@ -180,27 +198,37 @@ SwipeReveal.prototype.slideOut = function (event, li) {
 
   that.state = 'out';
 
+  var isContents = $(that.currentItem).data('swipe-reveal-contents');
+
   var $li = that.getLi(li);
   var $contents = $li.find(that.options.contentsSelector);
   var $revealed = $li.find(that.options.revealedSelector)
 
   var endLeft = gesture.direction == 'left' ? -1 * that.width : that.width;
 
-  var after = function () {
-    if (that.options.autoDismiss) {
-      $li.doTimeout('dismiss', that.options.dismissTimeout, function () {
-        that.dismiss.call(that, $li);
-      })
-      if (that.options.autoDismissWarn) {
-        $li.doTimeout('dismiss-warn', that.options.dismissWarnTimeout, function () {
-          $li.animate({
-            opacity: 0.5
-          }, {
-            duration: that.options.dismissTimeout - that.options.dismissWarnTimeout
-          , queue: false
-          })
+  var after;
+  if (isContents) {
+    after = function () {
+      if (that.options.autoDismiss) {
+        $li.doTimeout('dismiss', that.options.dismissTimeout, function () {
+          that.dismiss.call(that, $li);
         })
+        if (that.options.autoDismissWarn) {
+          $li.doTimeout('dismiss-warn', that.options.dismissWarnTimeout, function () {
+            $li.animate({
+              opacity: 0.5
+            }, {
+              duration: that.options.dismissTimeout - that.options.dismissWarnTimeout
+            , queue: false
+            })
+          })
+        }
       }
+    }
+  }
+  else {
+    after = function () {
+      that.dismiss.call(that, $li);
     }
   }
 
@@ -210,7 +238,7 @@ SwipeReveal.prototype.slideOut = function (event, li) {
   var frameMs = 1000 / 60; // 60 fps
 
   var start = {
-    left: parseFloat($contents.css('left'))
+    left: parseFloat((isContents ? $contents : $revealed).css('left'))
   , opacity: parseFloat($revealed.css('opacity'))
   }
   var curr = {};
@@ -231,12 +259,19 @@ SwipeReveal.prototype.slideOut = function (event, li) {
   var frame = function () {
     curr.left += per.left;
     curr.opacity += per.opacity;
-    $contents.css({
-      left: curr.left
-    })
-    $revealed.css({
-      opacity: curr.opacity
-    })
+    if (isContents) {
+      $contents.css({
+        left: curr.left
+      })
+      $revealed.css({
+        opacity: curr.opacity
+      })
+    }
+    else {
+      $revealed.css({
+        left: curr.left
+      })
+    }
     if (directional > 0 ? curr.left < end.left : curr.left > end.left) {
       setTimeout(frame, frameMs)
     }
