@@ -36,7 +36,8 @@ To programmatically "undo" a reveal on a list item (returning it to default stat
 
 ```javascript
 var $list = $('.swipe-reveal');
-$list.swipeReveal();
+var options = {};
+$list.swipeReveal(options);
 // ...
 $list.swipeReveal('undo', listElement);
 ```
