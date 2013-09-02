@@ -26,7 +26,11 @@ Then add code:
 
 ```javascript
 $(function () {
-  $('.swipe-reveal').swipeReveal();
+  $('.swipe-reveal').swipeReveal({
+    revealed: function (el) {
+      return '<div> Revealed! </div> <button class="undo"> Undo </button>';
+    }
+  });
 });
 ```
 
