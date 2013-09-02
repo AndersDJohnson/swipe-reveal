@@ -10,15 +10,24 @@ html, body {
 }
 
 body {
-  padding: 40px 0;
-  background: black;
+  padding: 0;
+  background: #333;
   font-family: sans-serif;
+}
+
+.content {
+  color: white;
+  padding: 20px;
 }
 
 @media screen and (min-width: 480px) {
   .swipe-reveal {
     width: 480px;
   }
+}
+
+.swipe-reveal-contents {
+  line-height: 36px;
 }
 
 .revealed-cell {
