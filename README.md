@@ -32,7 +32,7 @@ See examples directory for more details.
 
 See source code for all options. Here are some important ones:
 
-**revealed** *function ( HTMLElement ) => String*: A function returning markup for revealed content.
+**revealed** *function ( HTMLElement ) => String*: A function returning markup for revealed content. Called for each list element, passed as an argument.
 
 **revealThreshold** *Number*: A value 0-1 representing the minimum distance as a fraction of item list width that drag must be in order to trigger a reveal.
 
