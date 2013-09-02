@@ -16,7 +16,7 @@ SwipeReveal = function ( el, options ) {
   };
   this.options.contentsSelector = '.' + this.options.contentsClass;
   this.options.revealedSelector = '.' + this.options.revealedClass;
-  this.options.undoSelector = this.options.undoSelection || this.options.revealedSelector + ' .undo';
+  this.options.undoSelector = this.options.undoSelector || this.options.revealedSelector + ' .undo';
   this._init();
 };
 
