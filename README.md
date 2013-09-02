@@ -1,6 +1,10 @@
 # SwipeReveal
 
-Soup up your vanilla HTML list with swipe-to-reveal actions à la the Gmail app for Android or Twitter for iPhone.
+Soup up your vanilla HTML list with swipe-to-reveal actions, à la the Gmail app for Android or Twitter for iPhone.
+
+Works with mouse and touch events!
+
+[Here's a demo.](http://AndersDJohnson.github.io/swipe-reveal/examples/basic/)
 
 Depends on jQuery, Hammer.js, jQuery Easing, jQuery doTimeout, jquery-bridget, and optionally jQuery-Animate-Enhanced.
 
@@ -35,6 +39,7 @@ var $list = $('.swipe-reveal');
 $list.swipeReveal();
 // ...
 $list.swipeReveal('undo', listElement);
+
 });
 ```
 
