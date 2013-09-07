@@ -10,11 +10,9 @@ Depends on jQuery, Hammer.js, jQuery Easing, jQuery doTimeout, jquery-bridget, a
 
 ## Usage
 
-Download.
+Install with Bower:
 
-Install bower dependencies:
-
-`bower install`
+`bower install swipe-reveal`
 
 Then add code:
 
